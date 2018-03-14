@@ -4,86 +4,131 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Valentine's Day</title>
-    <script src="http://img.mukewang.com/down/55ac9a860001a6c500000000.js"></script>
-    <style type="text/css">
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        ul,
-        li {
-            list-style-type: none;
-        }
-        /*主体部分*/
-        #content {
-            width    : 60%;
-            height   : 60%;
-            top      : 20%;
-            left     : 20%;
-            overflow : hidden;
-            position : absolute;
-            border   : 1px solid #ccc;
-        }
-
-        .content-wrap {
-            position: relative;
-        }
-        .content-wrap > li {
-            width: 100%;
-            height: 100%;
-            background: #CAE1FF;
-            color: red;
-            float: left;
-            overflow: hidden;
-            position: relative;
-        }
-        li:nth-child(2) {
-            background: #9BCD9B;
-        }
-
-        li:nth-child(3) {
-            background: yellow;
-        }
-
-    </style>
+    <link rel='stylesheet' href='style.css' />
+    <link rel='stylesheet' href='pageA.css' />
+    <link rel='stylesheet' href='pageB.css' />
+    <link rel='stylesheet' href='pageC.css' />
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="http://img.mukewang.com/down/55ac9ea30001ace700000000.js"></script>
 </head>
 
 <body>
 <div id='content'>
     <ul class='content-wrap'>
         <!-- 第一副画面 -->
-        <li> Page one </li>
+        <li>
+            <!-- 背景 -->
+            <div class="a_background">
+                <div class="a_background_top"></div>
+                <div class="a_background_middle"></div>
+                <div class="a_background_botton"></div>
+                </adiv>
+                <!-- 云 -->
+                <div class="cloudArea">
+                    <div class="cloud"></div>
+                    <div class="cloud"></div>
+                </div>
+                <!-- 太阳 -->
+                <div id="sun"></div>
+        </li>
         <!-- 第二副画面 -->
-        <li> Page two </li>
+        <li>
+            <!-- 背景图 -->
+            <div class="b_background"></div>
+            <div class="b_background_preload"></div>
+            <!-- 商店 -->
+            <div class="shop">
+                <div class="door">
+                    <div class="door-left"></div>
+                    <div class="door-right"></div>
+                </div>
+                <!-- 灯 -->
+                <div class="lamp"></div>
+            </div>
+            <!-- 鸟 -->
+            <div class="bird"></div>
+        </li>
         <!-- 第三副画面 -->
-        <li> Page three </li>
+        <li>
+            <!-- 背景图 -->
+            <div class="c_background">
+                <div class="c_background_top"></div>
+                <div class="c_background_middle"></div>
+                <div class="c_background_botton"></div>
+            </div>
+            <!-- 小女孩 -->
+            <div class="girl"></div>
+            <div class="bridge-bottom">
+                <div class="water">
+                    <div id="water1" class="water_1"></div>
+                    <div id="water2" class="water_2"></div>
+                    <div id="water3" class="water_3"></div>
+                    <div id="water4" class="water_4"></div>
+                </div>
+            </div>
+            <!-- 星星 -->
+            <ul class="stars">
+                <li class="stars1"></li>
+                <li class="stars2"></li>
+                <li class="stars3"></li>
+                <li class="stars4"></li>
+                <li class="stars5"></li>
+                <li class="stars6"></li>
+            </ul>
+            <!-- 慕课网logo图 -->
+            <div class="logo"></div>
+        </li>
     </ul>
+    <div id="boy" class="charector"></div>
 </div>
-<script type="text/javascript">
-    var container = $("#content");
-    // 获取第一个子节点
-    var element = container.find(":first");
-    // li页面数量
-    var slides = element.find("li");
-    // 获取容器尺寸
-    var width = container.width();
-    var height = container.height();
-    // 设置li页面总宽度
-    element.css({
-        width  : (slides.length * width) + 'px',
-        height : height + 'px'
-    });
-    // 设置每一个页面li的宽度
-    $.each(slides, function(index) {
-        var slide = slides.eq(index); //获取到每一个li元素
-        // ？
-        slide.css({
-            width: width +'px',
-            height: height + 'px'
-        });
-    });
-</script>
+<div class="button">
+    <button>Music</button>
+</div>
 </body>
+<script type="text/javascript">
+    $(function() {
+
+        //////////
+        // 小孩走路 //
+        //////////
+        var boy = BoyWalk();
+
+        boy.talkFlower();
+
+        // 音乐配置
+        var audioConfig = {
+            enable: true, // 是否开启音乐
+            playURl: 'http://www.imooc.com/upload/media/happy.wav', // 正常播放地址
+            cycleURL: 'http://www.imooc.com/upload/media/circulation.wav' // 正常循环播放地址
+        };
+
+        /////////
+        //背景音乐 //
+        /////////
+        function Hmlt5Audio(url, isloop) {
+            var audio = new Audio(url);
+            audio.autoPlay = true;
+            audio.loop = isloop || false;
+            audio.play();
+            return {
+                end: function(callback) {
+                    audio.addEventListener('ended', function() {
+                        callback();
+                    }, false);
+                }
+            };
+        }
+
+        // 开始
+        $("button").click(function() {
+            var audio1 = Hmlt5Audio(audioConfig.playURl);
+            audio1.end(function() {
+                // ?
+            });
+        });
+    })
+</script>
+<script type="text/javascript" src="Swipe.js"></script>
+<script type="text/javascript" src="Qixi.js"></script>
 
 </html>
